@@ -48,9 +48,13 @@ def bootstrap_horizontal(element, label_cols='col-sm-2 col-lg-2'):
 @register.filter
 def add_input_classes(field):
     if not is_checkbox(field) and not is_multiple_checkbox(field) \
-       and not is_radio(field) and not is_file(field):
+       and not is_radio(field) and not is_file(field) and not is_select(field):
         field_classes = field.field.widget.attrs.get('class', '')
-        field_classes += ' form-control'
+        field_classes += ' '
+        field.field.widget.attrs['class'] = field_classes
+    elif is_checkbox(field):
+        field_classes = field.field.widget.attrs.get('class', '')
+        field.classes += ' combobox input-large form-control'
         field.field.widget.attrs['class'] = field_classes
 
 
@@ -96,6 +100,10 @@ def is_multiple_checkbox(field):
 @register.filter
 def is_radio(field):
     return isinstance(field.field.widget, forms.RadioSelect)
+
+@register.filter
+def is_select(field):
+    return isinstance(field.field.widget, forms.Select)
 
 
 @register.filter
