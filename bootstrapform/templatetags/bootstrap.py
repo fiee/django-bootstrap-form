@@ -54,7 +54,7 @@ def add_input_classes(field):
         field.field.widget.attrs['class'] = field_classes
     elif is_checkbox(field):
         field_classes = field.field.widget.attrs.get('class', '')
-        field.classes += ' combobox input-large form-control'
+        field_classes += ' combobox input-large form-control'
         field.field.widget.attrs['class'] = field_classes
 
 
