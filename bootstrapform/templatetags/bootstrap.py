@@ -50,9 +50,9 @@ def add_input_classes(field):
     if not is_checkbox(field) and not is_multiple_checkbox(field) \
        and not is_radio(field) and not is_file(field) and not is_select(field):
         field_classes = field.field.widget.attrs.get('class', '')
-        field_classes += ' '
+        field_classes += ' form-control'
         field.field.widget.attrs['class'] = field_classes
-    elif is_checkbox(field):
+    elif is_select(field):
         field_classes = field.field.widget.attrs.get('class', '')
         field_classes += ' combobox input-large form-control'
         field.field.widget.attrs['class'] = field_classes
