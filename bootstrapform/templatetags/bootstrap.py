@@ -1,4 +1,5 @@
-from django import forms, VERSION as django_version
+from django import forms
+from django import VERSION
 from django.contrib.admin import widgets
 from django.template import Context
 from django.template.loader import get_template
@@ -72,7 +73,7 @@ def render(element, markup_classes):
     if isinstance(element, forms.forms.BoundField):
         add_input_classes(element)
         template = get_template(config.BOOTSTRAP_FIELD_TEMPLATE)
-        context = Context(dict(common_context, **{'field': element, 'classes': markup_classes, 'form': element.form}))
+        context = {'field': element, 'classes': markup_classes, 'form': element.form}
     else:
         has_management = getattr(element, 'management_form', None)
         if not hasattr(element, 'required_css_class'):
@@ -83,16 +84,18 @@ def render(element, markup_classes):
                     add_input_classes(field)
 
             template = get_template(config.BOOTSTRAP_FORMSET_TEMPLATE)
-            context = Context(dict(common_context, **{'formset': element, 'classes': markup_classes}))
+            context = {'formset': element, 'classes': markup_classes}
         else:
             for field in element.visible_fields():
                 add_input_classes(field)
 
             template = get_template(config.BOOTSTRAP_FORM_TEMPLATE)
-            context = Context(dict(common_context, **{'form': element, 'classes': markup_classes}))
+            context = {'form': element, 'classes': markup_classes}
 
-    if django_version >= (1, 8):
-        context = context.flatten()
+    context = common_context.update(context)
+    
+    if VERSION[0] * 1000 + VERSION[1] < 1008:
+        context = Context(context)
 
     return template.render(context)
 
