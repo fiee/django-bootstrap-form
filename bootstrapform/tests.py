@@ -29,7 +29,7 @@ class ExampleForm(forms.Form):
     radio_choice = forms.ChoiceField(choices=CHOICES, widget=forms.RadioSelect, required=False)
     multiple_choice = forms.MultipleChoiceField(choices=CHOICES, required=False)
     multiple_checkbox = forms.MultipleChoiceField(choices=CHOICES, widget=forms.CheckboxSelectMultiple, required=False)
-    file_fied = forms.FileField(required=False)
+    file_field = forms.FileField(required=False)
     password_field = forms.CharField(widget=forms.PasswordInput, required=False)
     textarea = forms.CharField(widget=forms.Textarea, required=False)
     boolean_field = forms.BooleanField(required=False)
