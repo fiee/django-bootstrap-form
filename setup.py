@@ -19,10 +19,10 @@ setup(
     keywords='bootstrap,django',
     author='tzangms',
     author_email='tzangms@gmail.com',
-    url='http://github.com/tzangms/django-bootstrap-form',
+    url='http://github.com/fiee/django-bootstrap-form',
     license='MIT',
     test_suite='runtests.runtests',
-    install_requires = [
+    install_requires=[
         "django>=1.5",
     ],
     packages=find_packages(),

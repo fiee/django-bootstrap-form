@@ -1,5 +1,7 @@
-python-django-bootstrap-form (3.2.0-1) unstable; urgency=low
+python-django-bootstrap-form (3.2.2-1) unstable; urgency=low
 
   * New upstream release
   
  -- Aldemir Akpinar <aldemir.akpinar@gmail.com>  Thu, 10 Dec 2015 11:14:14 +0200
+ -- Henning Hraban Ramm <hraban@fiee.net>  Mon, 17 Apr 2017 23:20:32 +0300
+ 
