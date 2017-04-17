@@ -63,14 +63,13 @@ def add_input_classes(field):
 
 
 def render(element, markup_classes):
-    element_type = element.__class__.__name__.lower()
     common_context = {
         'field_template': config.BOOTSTRAP_FIELD_TEMPLATE,
         'form_template': config.BOOTSTRAP_FORM_TEMPLATE,
         'formset_template': config.BOOTSTRAP_FORMSET_TEMPLATE,
     }
 
-    if element_type == 'boundfield':
+    if isinstance(element, forms.forms.BoundField):
         add_input_classes(element)
         template = get_template(config.BOOTSTRAP_FIELD_TEMPLATE)
         context = Context(dict(common_context, **{'field': element, 'classes': markup_classes, 'form': element.form}))
