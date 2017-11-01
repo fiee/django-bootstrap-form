@@ -53,6 +53,7 @@ def add_input_classes(field):
         field_classes = field.field.widget.attrs.get('class', '')
         field_classes += ' form-control'
         field.field.widget.attrs['class'] = field_classes
+    return field
 
 
 def render(element, markup_classes):
