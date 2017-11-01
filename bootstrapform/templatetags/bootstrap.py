@@ -1,5 +1,5 @@
 from django import forms
-from django import VERSION
+from django import VERSION as django_version
 from django.contrib.admin import widgets
 from django.template import Context
 from django.template.loader import get_template
@@ -93,8 +93,8 @@ def render(element, markup_classes):
             context = {'form': element, 'classes': markup_classes}
 
     context = common_context.update(context)
-    
-    if VERSION[0] * 1000 + VERSION[1] < 1008:
+
+    if django_version < (1, 8):
         context = Context(context)
 
     return template.render(context)

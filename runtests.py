@@ -10,7 +10,7 @@ from django.conf import settings
 local_path = lambda path: os.path.join(os.path.dirname(__file__), path)
 
 settings.configure(
-    DATABASES = {
+    DATABASES={
         'default': {
             'ENGINE': 'django.db.backends.sqlite3',
             'NAME': ':memory:'
@@ -24,7 +24,7 @@ settings.configure(
         'django.contrib.sites',
         'bootstrapform',
     ],
-    MIDDLEWARE_CLASSES = (
+    MIDDLEWARE_CLASSES=(
         'django.contrib.sessions.middleware.SessionMiddleware',
         'django.middleware.common.CommonMiddleware',
         'django.middleware.csrf.CsrfViewMiddleware',
@@ -35,11 +35,11 @@ settings.configure(
     SITE_ID=1,
     DEBUG=False,
     ROOT_URLCONF='',
-
-    TEMPLATES = [
+    TEMPLATES=[
         {
             'BACKEND': 'django.template.backends.django.DjangoTemplates',
             'DIRS': [local_path('templates'), ],
+            'APP_DIRS': True,
             'OPTIONS': {
                 'debug': False,
                 'context_processors': [
@@ -54,9 +54,8 @@ settings.configure(
                 ],
             },
         },
-]
+    ]
 )
-
 
 
 def runtests(**test_args):
@@ -67,7 +66,7 @@ def runtests(**test_args):
 
     try:
         django.setup()
-    except:
+    except Exception:
         pass
 
     TestRunner = get_runner(settings)
