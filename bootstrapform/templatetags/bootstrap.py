@@ -73,8 +73,12 @@ def render(element, markup_classes):
 
     if isinstance(element, forms.forms.BoundField):
         add_input_classes(element)
-        template = get_template(config.BOOTSTRAP_FIELD_TEMPLATE)
-        context = {'field': element, 'classes': markup_classes, 'form': element.form}
+        tpl = get_template(config.BOOTSTRAP_FIELD_TEMPLATE)
+        context = {
+            'field': element,
+            'classes': markup_classes,
+            'form': element.form
+            }
     else:
         has_management = getattr(element, 'management_form', None)
         if not hasattr(element, 'required_css_class'):
@@ -84,13 +88,13 @@ def render(element, markup_classes):
                 for field in form.visible_fields():
                     add_input_classes(field)
 
-            template = get_template(config.BOOTSTRAP_FORMSET_TEMPLATE)
+            tpl = get_template(config.BOOTSTRAP_FORMSET_TEMPLATE)
             context = {'formset': element, 'classes': markup_classes}
         else:
             for field in element.visible_fields():
                 add_input_classes(field)
 
-            template = get_template(config.BOOTSTRAP_FORM_TEMPLATE)
+            tpl = get_template(config.BOOTSTRAP_FORM_TEMPLATE)
             context = {'form': element, 'classes': markup_classes}
 
     context = common_context.update(context)
@@ -98,7 +102,7 @@ def render(element, markup_classes):
     if django_version < (1, 8):
         context = Context(context)
 
-    return template.render(context)
+    return tpl.render(context)
 
 
 @register.filter
